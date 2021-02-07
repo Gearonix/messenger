@@ -1,0 +1,182 @@
+@import './../../source/fonts/font.css';
+
+.main{
+    background : url("../../source/messages_backgorund.png") no-repeat;
+    background-size: 100%;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+
+}
+.formMain{
+    width: 100%;
+    min-height: 109px;
+    background : #6F6F6F;
+    position: absolute;
+    bottom: 0;
+}
+.formMessagesBlock{
+    width: 962px;
+    height: 60px;
+    background : #939393;
+    border-radius: 30px;
+    margin: 0 auto;
+    margin-top: 25px;
+    position: relative;
+}
+.area{
+    width: 88%;
+    height: 85%;
+    background : transparent;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    padding-top: 7px;
+    padding-left: 16px;
+    margin: 0;
+    font-size: 30px;
+    color : white;
+}
+.area::placeholder{
+    font-size: 30px;
+    color : #BFBFBF;
+}
+.send{
+    position: absolute;
+    top: 0;
+    right: 20px;
+    height: 100%;
+    width: 50px;
+    border: none;
+    outline: none;
+    background : transparent;
+
+}
+.send:before{
+    font-family: 'icomoon' !important;
+    content: "\e900";
+    color : #75B8F6;
+    font-size: 40px;
+    cursor: pointer;
+    transition: color 0.5s;
+}
+.aside{
+    width: 97px;
+    background : rgba(81, 81, 81, 1);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.exit,.logout{
+    border: none;
+    outline: none;
+    background : transparent;
+    margin: 0 auto;
+    display: block;
+    margin-top: 35px;
+}
+
+.exit:before{
+    font-family: 'icomoon' !important;
+    content: "\e967";
+    color : rgba(219, 75, 75, 1);
+    font-size: 45px;
+    text-align: center;
+}
+.logout{
+    color : rgba(183, 183, 183, 1);
+}
+.logout:before{
+    font-family: 'icomoon' !important;
+    content: "\ea14";
+    font-size: 45px;
+    text-align: center;
+}
+.messagesBlock{
+    margin-left: 110px;
+    height: 88%;
+    overflow-y: auto;
+    position: relative;
+}
+.downddScroll{
+    width: 75px;
+    height: 75px;
+    border-radius: 100%;
+    background : #6F6F6F;
+    position: fixed;
+    right: 64px;
+    bottom: 132px;
+    border: none;
+    outline: none;
+    color : #C4C4C4;
+    font-size: 45px;
+}
+
+.messagesBlock::-webkit-scrollbar {
+    width: 10px;
+}
+
+.messagesBlock::-webkit-scrollbar-track {
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    background-color: #f9f9fd;
+    border-radius: 10px;
+}
+
+.messagesBlock::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(180deg, #00c6fb, #005bea);
+}
+.itemMain{
+    min-height: 133px;
+    background : #C4C4C4;
+    border-radius: 0 20px 20px 20px;
+    width: 670px;
+    margin-top: 55px;
+    display: flex;
+}
+.itemImageBlock{
+    
+    width: 168px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.itemImageBlock img{
+    width: 112px;
+    height: 107px;
+    border-radius: 100%;
+
+}
+.itemTextBlock{
+    
+}
+.from{
+    color : #7E7E7E;
+    font-size: 22px;
+    margin-left: 23px;
+    margin-top: 24px;
+    display: block;
+}
+.message{
+    font-size: 28px;
+    color : white;
+    margin-left: 23px;
+}
+.testBlock{
+    width: 800px;
+    height: 705px;
+    background : white;
+    position: fixed;
+    right: 164px;
+    bottom: 132px;
+}
+.testimage{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+}
+.testspan{
+    font-size: 30px;
+}

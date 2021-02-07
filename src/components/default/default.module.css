@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rhodium+Libre&display=swap');
+.main{
+    background : #ECFFFC;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border: 1px solid transparent;
+    
+}
+.logo{
+    width: 180px;
+    height: 180px;
+    background: url("../../source/logo.svg");
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 50px;
+    animation-name: gear;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 30s;
+}
+@keyframes gear {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.logoTitle{
+    font-family: 'Pacifico', cursive;
+    font-size: 70px;
+    color : #7B7B7B;
+    text-align: center;
+    margin-top: 207px;
+    font-weight: normal;
+}
+.title{
+    font-family: 'Rhodium Libre', serif;
+    color : #7B7B7B;
+    font-size: 100px;
+    text-align: center;
+    margin-top: 86px;
+}
+
+.loginRegisterBlock{
+    width: 543px;
+    margin: 0 auto;
+    margin-top: 107px;
+    display: flex;
+    justify-content: space-between;
+}
+.login,.register{
+    font-family: 'Rhodium Libre', serif;
+    font-size: 70px;
+    text-decoration: none;
+    display: block;
+    transition: color,1s;
+ }
+.login{
+    color : #11588C;
+
+}
+.login:hover{
+    color : rgba(110, 178, 227, 1);
+}
+.register{
+    color : #715B76;
+}
+.register:hover{
+    color : rgba(171, 138, 180, 0.86);
+}

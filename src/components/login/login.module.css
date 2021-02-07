@@ -1,0 +1,96 @@
+
+.input,.loginButton,.registerButton{
+    border: none;
+    outline: none;
+    background: #EDEDED;
+    border-radius: 20px;
+    width: 95%;
+    height: 81px;
+    font-size: 30px;
+    color: #7E7E7E;
+    padding-left: 27px;
+}
+.inputTitle{
+    color: #4B4B4B;
+    font-size: 30px;
+    font-weight: normal;
+}
+.title{
+    text-align: center;
+    color: #525252;
+    font-size: 70px;
+    margin: 20px;
+    font-weight: normal;
+}
+.loginButton,.registerButton{
+    color: white;
+    background: #89B8FF;
+    /*margin: 0 auto;*/
+    display: block;
+    padding: 0;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+
+}
+.input::placeholder{
+    color:rgba(192, 192, 192, 1);
+}
+.loginButton:hover{
+    background: rgba(72, 141, 243, 1);
+}
+.loginBlock{
+    margin: 0 auto;
+    margin-bottom: 85px;
+    width: 567px;
+}
+.input{
+    background : #E8F0FE;
+    box-sizing: border-box;
+
+}
+.back{
+    margin-top: 21px;
+    margin-bottom: 21px;
+    color : #1954AC;
+    font-size: 30px;
+    text-decoration: none;
+    display: block;
+    margin-left: 15px;
+}
+.error{
+
+    font-size: 27px;
+    color : #DC1919;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+.registerButton{
+    background : #715B76;
+}
+.registerButton:hover{
+    background: rgba(201, 87, 227, 1);
+}
+.openMain{
+    animation: open 1s;
+}
+.closeMain{
+    animation: close 1s;
+}
+@keyframes open {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes close {
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}

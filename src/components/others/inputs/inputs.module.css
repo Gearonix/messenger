@@ -1,0 +1,11 @@
+.input_error input{
+    border : 2px solid red;
+}
+.input_error span{
+    color : red;
+    font-size: 24px;
+}
+.nvError input{
+    background: darkgrey;
+    border: none;
+}
