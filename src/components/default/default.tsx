@@ -1,7 +1,13 @@
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import React from "react";
 import classes from './default.module.css';
+import {useSelector} from "react-redux";
+import {StateType} from "../../store";
 const Default = function (){
+    const logined = useSelector((state : StateType) => state.login.logined);
+    if (logined){
+        return <Redirect to={'/enterroom'} />
+    }
     return(
         <div className={classes.main}>
             <div className={classes.logo}></div>

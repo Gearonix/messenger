@@ -1,31 +1,45 @@
-import {createRoom_tc as createRoom} from "../../reducers/login_reducer";
-import {connect} from "react-redux";
+import {createRoom_tc as createRoomTC} from "../../reducers/login_reducer";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../others/inputs/inputs";
 import {NavLink, Redirect} from 'react-router-dom';
 import {CreateRoomVal} from "../../validator";
 import classes from './createRoom.module.css';
+import {StateType} from "../../store";
 
-const CreateRoom = function (props){
-    if (props.room){
+
+
+type State = {
+    user_name : string | null
+    room : string | null,
+}
+
+const CreateRoom = function (){
+    const dispatch = useDispatch()
+    const state : State = {
+        user_name : useSelector((state : StateType) => state.login.name),
+        room : useSelector((state : StateType) => state.login.room),
+    }
+
+    if (state.room){
         return <Redirect to={'/messages'} />
     }
-    if (!props.user_name){
+    if (!state.user_name){
         return <Redirect to={'/'} />
     }
-    function createRoom(data){
-        let sum = {room : data.room, user_name : props.user_name};
-        props.createRoom(sum);
-        // debugger
+    function createRoom(data : {room : string}){
+        let sum = {room : data.room, user_name : state.user_name};
+        dispatch(createRoomTC(sum));
     }
     return(
         <div>
             <h1 className={classes.title}>Give a name for your room:</h1>
+            {/*@ts-ignore*/}
             <CreateRoomFormC onSubmit={createRoom}/>
         </div>
     )
 }
-const CreateRoomForm = function (props){
+const CreateRoomForm = function (props : any){
     return(
         <form onSubmit={props.handleSubmit}>
             <div className={classes.loginBlock}>
@@ -49,14 +63,4 @@ const CreateRoomFormC = reduxForm({
 
 
 
-
-let state = function(state){
-    return{
-        user_name : state.login.name,
-        room : state.login.room
-    }
-}
-
-
-
-export default connect(state,{createRoom})(CreateRoom);
+export default CreateRoom;

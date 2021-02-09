@@ -1,15 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
-import {Switch, Route, NavLink} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import Login from "./components/login/login";
 import Register from "./components/register/register";
 import EnterRoom from "./components/enterRoom/enterRoom";
 import Messages from "./components/messages/messages";
-import React from 'react';
+import React, {useEffect} from 'react';
 import Default from "./components/default/default";
 import CreateRoom from "./components/createroom/createRoom";
+import {useDispatch} from "react-redux";
+import { getAuthTC } from './reducers/login_reducer';
 
 const App = function(){
+    const dispatch = useDispatch();
+    function mount(){
+        dispatch(getAuthTC())
+    }
+    useEffect(mount,[])
       return (
           <div className="App">
               <Switch>

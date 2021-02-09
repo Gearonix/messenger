@@ -1,21 +1,29 @@
 import {reduxForm,Field} from "redux-form";
-import {connect} from 'react-redux';
-import {loginTC as login,enterRoomTC as enterRoom} from "../../reducers/login_reducer";
+import { useDispatch, useSelector} from 'react-redux';
+import {loginTC as login} from "../../reducers/login_reducer";
 import {Input} from "../others/inputs/inputs";
 import {LoginVal} from "../../validator";
 import {Redirect,NavLink} from 'react-router-dom';
 import classes from './login.module.css';
+import {StateType} from "../../store";
 
-const Login = function (props){
-
-    if (props.logined){
+const Login = function (){
+    const dispatch = useDispatch()
+    const state = {
+        logined : useSelector((state : StateType) => state.login.logined)
+    }
+    if (state.logined){
         return <Redirect to={'/enterroom'} />
     }
+    function log(data :  {name :  string, password :  string}){
+        dispatch(login(data))
+    }
     return(
-        <LoginFormC onSubmit={props.login} />
+        // @ts-ignore
+        <LoginFormC onSubmit={log} />
     )
 }
-const LoginForm = function (props){
+const LoginForm = function (props : any){
     return(
         <form onSubmit={props.handleSubmit}>
             <div className={classes.loginBlock}>
@@ -45,13 +53,4 @@ const LoginFormC = reduxForm({
 
 
 
-
-
-let state = function (state){
-    return{
-        logined : state.login.logined
-    }
-}
-
-
-export default connect(state,{login})(Login);
+export default Login

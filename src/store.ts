@@ -9,7 +9,11 @@ let reducers= combineReducers({
     messages : messages_reducer
 })
 
+type GLOBAL_TYPE = typeof reducers;
 
-let store = createStore(reducers,applyMiddleware(thunk))
+export type StateType = ReturnType<GLOBAL_TYPE>
+
+let store = createStore(reducers,applyMiddleware(thunk));
+
 
 export default store
