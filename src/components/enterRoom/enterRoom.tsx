@@ -10,7 +10,8 @@ import {
     openChangeProfileAC,
     addImageAC as addImage,
     closeChangeProfileAC as closeChangeProfile,
-    enterRoomTC
+    enterRoomTC,
+    logoutTC, getRoomsTC
 } from "../../reducers/login_reducer";
 import {NavLink, Redirect} from 'react-router-dom';
 import React from "react";
@@ -20,6 +21,8 @@ import styles from './changeProfile.module.css';
 import {useEffect} from "react";
 import socket from "../../socket";
 import {StateType} from "../../store";
+import {includeImage, сutWord} from "../../tools";
+
 
 // async function test(image){
 //     let module = await import(`../../../../backend/${image}`);
@@ -36,10 +39,15 @@ type State = {
     description: null | string
     imageFile: null | string
     change: boolean
+    rooms : Array<any>
 }
 
 const EnterRoom = function () {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    useEffect(mount,[])
+    function mount(){
+        dispatch(getRoomsTC());
+    }
     const state: State = {
         room: useSelector((state: StateType) => state.login.room),
         logined: useSelector((state: StateType) => state.login.logined),
@@ -48,7 +56,8 @@ const EnterRoom = function () {
         image: useSelector((state: StateType) => state.login.avatar),
         imageFile: useSelector((state: StateType) => state.login.imageFile),
         user_name: useSelector((state: StateType) => state.login.name),
-        password: useSelector((state: StateType) => state.login.password)
+        password: useSelector((state: StateType) => state.login.password),
+        rooms : useSelector((state : StateType) => state.login.rooms)
     }
     if (state.room) {
         socket.emit('enter_room', {room: state.room})
@@ -64,7 +73,7 @@ const EnterRoom = function () {
     }
 
     function logout(event: any) {
-        dispatch(logoutAC());
+        dispatch(logoutTC())
         event.preventDefault();
     }
 
@@ -79,16 +88,7 @@ const EnterRoom = function () {
         dispatch(changeProfileTC(sum));
     }
 
-    let src;
-    if (state.image) {
-        try {
-            src = require(`./../../../../backend/${state.image}`);
-        } catch (error) {
-            console.log('error');
-        }
-
-    }
-    let isSrc = state.image && src ? src.default : base_avatar;
+    const isSrc = includeImage(state.image)
     return (
         <div className={classes.main}>
 
@@ -110,7 +110,8 @@ const EnterRoom = function () {
                     user_name={state.user_name} description={state.description}/>}
             </div>
             {/*@ts-ignore*/}
-            <RoomFormC user_name={state.user_name} onSubmit={enterRoom}/>
+            <RoomFormC user_name={state.user_name} onSubmit={enterRoom} rooms={state.rooms}
+            enter={enterRoom}/>
         </div>
     )
 }
@@ -180,9 +181,23 @@ const ChangeProfileForm = function (props : any) {
 const ChangeProfileFormC = reduxForm({
     form: 'changeprofile'
 })(ChangeProfileForm);
-
+const RoomItem = function(props : any){
+    return (
+        <div className={classes.itemMain} onClick={() => props.select({room : props.room})}>
+            <div className={classes.itemImage}><img src={includeImage(props.image)} /></div>
+            <div className={classes.itemBlock}>
+                <h1 className={classes.item_user}>{сutWord(props.room,16)}</h1>
+                <h1  className={classes.item_desc}>{сutWord(props.description,16)}</h1>
+            </div>
+        </div>
+    )
+}
 
 const RoomForm = function (props : any) {
+    console.log(props.rooms)
+    // { room : string }
+    const rooms = props.rooms.map((item : any) => <RoomItem image={item.image}
+                                            description={item.description} room={item.room} select={props.enter} />)
     return (
         <form onSubmit={props.handleSubmit} className={classes.roomBlock}>
             <div className={classes.roomInnerBlock}>
@@ -196,6 +211,8 @@ const RoomForm = function (props : any) {
                         <button className={classes.createRoom}>Create</button>
                     </NavLink>
                     <h2>{props.error}</h2>
+                    <h2 className={classes.roomsTitleOK}>Rooms:</h2>
+                    {rooms}
                 </div>
             </div>
         </form>

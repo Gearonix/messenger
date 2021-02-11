@@ -1,13 +1,20 @@
 @import './../../source/fonts/font.css';
 
 .main{
-    background : url("../../source/messages_backgorund.png") no-repeat;
+    /*background : url("../../source/messages_backgorund.png") no-repeat;*/
     background-size: 100%;
     background-position: center;
     width: 100%;
     height: 100%;
     position: fixed;
 
+}
+.mainBack{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 .formMain{
     width: 100%;
@@ -21,7 +28,7 @@
     height: 60px;
     background : #939393;
     border-radius: 30px;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
     margin-top: 25px;
     position: relative;
 }
@@ -128,14 +135,22 @@
     border-radius: 10px;
     background: linear-gradient(180deg, #00c6fb, #005bea);
 }
-.itemMain{
+.itemMain,.itemMyMain{
     min-height: 133px;
     background : #C4C4C4;
     border-radius: 0 20px 20px 20px;
     width: 670px;
+    position: relative;
     margin-top: 55px;
+}
+.itemMyMain{
+    /*margin-left: 888px;*/
+    background: #B5C9C9;
+}
+.itemMainBlock{
     display: flex;
 }
+
 .itemImageBlock{
     
     width: 168px;
@@ -149,6 +164,7 @@
     border-radius: 100%;
 
 }
+
 .itemTextBlock{
     
 }
@@ -172,6 +188,15 @@
     right: 164px;
     bottom: 132px;
 }
+.formBlock{
+    display: flex;
+    width: 60%;
+    margin: 0 auto;
+}
+.formaddimageblock{
+    /*position: absolute;*/
+    margin-top: 30px;
+}
 .testimage{
     width: 100px;
     height: 100px;
@@ -179,4 +204,244 @@
 }
 .testspan{
     font-size: 30px;
+}
+.userDataMain,.useDataMainClose,.room_data_main{
+    width: 944px;
+    height: 800px;
+    border-radius: 10px;
+    background : rgba(235, 240, 248, 1);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border: 2px solid rgb(190, 196, 192);
+    transform: translate(-50%,-50%);
+    animation: userDataMain 0.6s forwards;
+}
+.deleteBlock{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+}
+
+
+.useDataMainClose{
+    animation: userDataMainClose 0.6s forwards;
+}
+.userDataImage{
+    width: 300px;
+    height: 300px;
+    border-radius: 100%;
+    margin: 0 auto;
+    display: block;
+    margin-top: 77px;
+    margin-bottom: 23px;
+}
+.userDataUserName{
+    color : #555555;
+    font-weight: normal;
+    font-size: 60px;
+    text-align: center;
+    margin: 0;
+}
+.userDataDesc{
+    color : #6C6C6C;
+    font-size: 50px;
+    text-align: center;
+    margin: 0;
+    font-weight: normal;
+    margin-top: 31px;
+}
+.backgroundUserdata{
+    background : black;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    animation: userDataBack 0.4s forwards;
+}
+.attachedMain{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    /*background: black;*/
+}
+.userdata{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+}
+@keyframes userDataMain {
+    0%{
+        top: 200%;
+    }
+    100%{
+        top: 50%;
+    }
+}
+@keyframes userDataBack {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 0.3;
+    }
+}
+.userDataCross{
+    float: right;
+    margin-top: 5px;
+    cursor: pointer;
+}
+@keyframes userDataMainClose {
+    0%{
+        top: 50%;
+    }
+    100%{
+        top: 200%;
+    }
+}
+.attachedpicture{
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    display: block;
+}
+.somediv{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+.attachedImageBlock{
+    background: white;
+    width: 594px;
+    height: 600px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    animation: attached 0.7s;
+}
+.atachedTitle{
+    font-size: 25px;
+    color : #3A616F;
+    font-weight: normal;
+    margin: 0;
+    margin-top: 40px;
+    margin-left: 140px;
+}
+.atachedInput{
+    border: none;
+    border-bottom: 7px solid #3CA4C9;
+    height: 40px;
+    width: 300px;
+    outline: none;
+    display: block;
+    margin: 0 auto;
+    font-size: 30px;
+    color : rgba(147, 164, 167, 1);
+}
+.attachedSend{
+    font-size: 33px;
+    color : #3CA4C9;
+    /*margin-left: 373px;*/
+    font-weight: normal;
+}
+.videoForm{
+    background: #EDEDED;
+    position: absolute;
+    z-index: 2;
+}
+.attachedoverflow{
+    width: 300px;
+    height: 300px;
+    overflow-y: auto;
+    margin: 0 auto;
+    margin-top: 77px;
+}
+.attachedoverflow::-webkit-scrollbar {
+    width: 5px;
+}
+
+.attachedoverflow::-webkit-scrollbar-track {
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    background-color: #f9f9fd;
+    border-radius: 10px;
+}
+
+.attachedoverflow::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(91, 102, 106, 1), rgba(70, 117, 83, 1));
+}
+@keyframes attached {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.videoTitle{
+    text-align: center;
+    margin-top: 86px;
+}
+.videoMain{
+    height: 527px;
+}
+.errorMessage{
+    text-align: center;
+    color : red;
+    font-weight: normal;
+    font-size: 22px;
+}
+.roomData_main{
+    height: 109px;
+    width: 95%;
+    background : #6F6F6F;
+    position: fixed;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    transition: background-color,1s;
+    cursor: pointer;
+    /*z-index: 1;*/
+}
+.roomData_main:hover{
+    background: rgba(124, 124, 124, 1);
+}
+.roomData_image{
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    margin-left: 122px;
+    margin-right: 29px;
+}
+.roomData_block{
+    height: 100%;
+    width: 192px;
+}
+.roomData_title{
+    color : white;
+    font-size: 30px;
+    font-weight: normal;
+}
+.roomData_desc{
+    color : #BABABA;
+    font-size: 25px;
+}
+.itemDate{
+    color : #808080;
+    font-size: 20px;
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+    font-weight: normal;
+    display: block;
 }

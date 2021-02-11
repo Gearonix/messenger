@@ -13,11 +13,17 @@ const initial : loginType ={
     avatar : null,
     description : null,
     openChangeProfile : false,
-    imageFile : null
+    imageFile : null,
+    currentUser : {
+            description :  null,
+            user_name :  null,
+            image :  null
+    },
+    rooms : []
 }
 type ActionTypes = loginAT | registerAT | enterRoomAT | {type : 'OPEN-CHANGE-PROFILE' } |
-    {type : 'LOGOUT'} | oldImageAT |
-    changeProfileAT | closeChangeProfileAT | addImageAT | {type : 'EXIT-ROOM'}
+    {type : 'LOGOUT'} | oldImageAT | setCurrentUserAT |
+    changeProfileAT | closeChangeProfileAT | addImageAT | {type : 'EXIT-ROOM'} | getRoomsAT
 type ThunkType = ThunkAction<Promise<AxiosResponse<any> | any>, StateType, unknown, ActionTypes>
 const login_reducer = function (state=initial,action : ActionTypes) : loginType{
     switch (action.type){
@@ -40,12 +46,14 @@ const login_reducer = function (state=initial,action : ActionTypes) : loginType{
             return {...state,openChangeProfile: true}
         case 'ADD-IMAGE':
             return {...state,imageFile: action.file}
-        // case  'ADD-IMAGE-FINALLY':
-        //     return {...state,avatar: action.src}
         case 'CLOSE-CHANGE-PROFILE':
             return {...state, openChangeProfile : false}
         case 'CHANGE-PROFILE-BUT-OLD-IMAGE':
             return {...state, name: action.name,description: action.description,openChangeProfile : false}
+        case 'SET-CURRENT-USER':
+            return {...state,currentUser : action.data}
+        case 'GET-ROOMS':
+            return {...state, rooms : action.data}
         default:
             return state
     }
@@ -64,7 +72,7 @@ type loginATData  = {user_name : null | string, password : null | string,
     room : null | string,
     image : null | string,description : null | string}
 
-export let mmloginAC = function (data : loginATData ) : loginAT{
+export let loginAC = function (data : loginATData ) : loginAT{
     return{
         type : 'LOGIN',
         name : data.user_name,
@@ -78,6 +86,13 @@ type registerAT = {
     type : 'REGISTER'
     name : null | string
     password : null | string
+}
+
+export let logoutTC = function() : ThunkType{
+    return async function(dispatch){
+        await api.clearCookie();
+        dispatch(logoutAC())
+    }
 }
 
 export let registerAC = function (data : {name : null | string,password : null | string}) : registerAT{
@@ -230,7 +245,6 @@ export let changeProfileTC = function (data : changeProfileDataType) : ThunkType
 export let getAuthTC = function() : ThunkType{
     return async function(dispatch){
         const response = await api.auth();
-        console.log(response)
         if (response.data.code==0){
             dispatch(loginTC(response.data.data))
         }
@@ -269,7 +283,62 @@ export let closeChangeProfileAC = function () : closeChangeProfileAT{
         type : 'CLOSE-CHANGE-PROFILE'
     }
 }
+export let getUserTC = function(user_name : string | null) : ThunkType{
+    return async function(dispatch){
+        const response = await api.getUser(user_name);
+        if (response.data.length==0){
+            return
+        }
+        dispatch(setCurrentUserAC(response.data[0]))
+    }
+}
 
+type setCurrentUserDataType = { description : string | null,
+    user_name : string | null,
+    image : string | null
+}
+
+type setCurrentUserAT = {
+    type : 'SET-CURRENT-USER',
+    data : setCurrentUserDataType
+}
+
+export let setCurrentUserAC = function(data : setCurrentUserDataType) : setCurrentUserAT{
+    return {
+        type : 'SET-CURRENT-USER',
+        data : data
+    }
+}
+export let addFilesTC = function(data : any) : ThunkType{
+    return async function(dispatch){
+        if (data.images.length==0){
+            return
+        }
+        for (let item of data.images){
+            await api.addFiles({...data,item})
+        }
+    }
+}
+
+type getRoomsAT = {
+    type : 'GET-ROOMS',
+    data : Array<any>
+}
+
+export let getRoomsAC = function(data : Array<any>) : getRoomsAT{
+    return{
+        type : 'GET-ROOMS',
+        data : data
+    }
+}
+
+export let getRoomsTC = function () : ThunkType{
+    return async function(dispatch){
+        const response = await api.getRooms();
+        // debugger
+        dispatch(getRoomsAC(response.data))
+    }
+}
 
 
 

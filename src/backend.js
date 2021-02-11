@@ -39,6 +39,7 @@ async function checkRequest(request,func = () => {}){
 
 
 
+
 io.on('connection', function (socket) {
     socket.on('get_messages',({room}) => {
         checkRequest(`select * from messages where room = '${room}';`,(messages) => {
@@ -46,8 +47,9 @@ io.on('connection', function (socket) {
         });
     })
     socket.on('add_message',({message,from,room,image}) => {
-        checkRequest(`insert messages(message,sender,room,image)
-         values('${message}','${from}','${room}','${image}');`, () => {
+        const date = new Date().getHours() + ':' + new Date().getMinutes();
+        checkRequest(`insert messages(message,sender,room,image,attached_images,creation_time)
+         values('${message}','${from}','${room}','${image}','[]','${date}');`, () => {
             checkRequest(`select * from messages where room = '${room}';`,(messages) => {
                 socket.to(room).emit('return_messages',messages)
             })
@@ -59,6 +61,9 @@ io.on('connection', function (socket) {
     socket.on('leave_room',({room,name}) => {
         checkRequest(`update users set room=NULL where user_name='${name}';`);
         socket.leave(room)
+    })
+    socket.on('delete_message',({id}) => {
+        checkRequest(`delete from messages where id = '${id}';`);
     })
 })
 
@@ -138,9 +143,45 @@ app.get('/auth', (req, res) => {
     }
     res.json({'code' : 10,'status' : 404, message : 'No cookie found'});
 })
+app.get('/clearcookie',(req,res) => {
+    res.clearCookie('username')
+    res.clearCookie('password')
+    res.json(ok())
+} )
+app.post('/getuser',(req,res) => {
+    const {user_name} = req.body
+    checkRequest(`select description, image, user_name from users  where user_name='${user_name}';`,(result) => {
+        res.json(result)
+    })
+})
 
-
-
+app.post('/getroomdata' ,(req,res) => {
+    const {room} = req.body;
+    checkRequest(`select * from rooms where room='${room}';`,(result) => {
+        checkRequest(` select user_name,description,image from users where room='${room}';`,(two) => {
+            res.json({
+                ...result[0],
+                users : two
+            })
+        })
+    })
+    // select * from users where room='test';
+})
+app.post('/changeroomdata',(req,res) => {
+    const {mode,value,old_room} = req.body;
+    const isName = mode=='name' ? 'room' : 'description';
+    checkRequest(`update rooms set ${isName}='${value}' where room='${old_room}';`);
+    if (isName=='room'){
+        checkRequest(`update users set room='${value}' where room='${old_room}';`);
+        checkRequest(`update messages set room='${value}' where room='${old_room}';`);
+    }
+    res.json(ok())
+})
+app.get('/getrooms',(req,res) => {
+    checkRequest(`select * from rooms order by id desc limit 4`,(result) => {
+        res.json(result)
+    })
+})
 
 io.on('connect_error', () => {
     console.log('error')

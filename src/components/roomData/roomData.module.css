@@ -1,0 +1,279 @@
+.main{
+    width: 1126px;
+    height: 791px;
+    position: fixed;
+    left: 50%;
+    top: 50px;
+    border-radius: 10px;
+    transform: translate(-50%,0);
+    background: #E7E7E7;
+    animation: open 0.5s;
+    overflow-y: auto;
+}
+
+.main::-webkit-scrollbar {
+    width: 6px;
+}
+
+.main::-webkit-scrollbar-track {
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    background-color: #f9f9fd;
+    border-radius: 10px;
+}
+
+.main::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(180deg, #00c6fb, #005bea);
+}
+@keyframes open {
+    0%{
+        left: 150%
+    }
+    100%{
+        left : 50%
+    }
+}
+.image{
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 39px;
+    position: relative;
+    border-radius: 100%;
+}
+.image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+    top: 0;
+}
+.image input{
+    position: relative;
+    z-index: 3;
+    opacity: 0;
+    cursor: pointer;
+    /*margin: 0 auto;*/
+}
+.fileBlock{
+    position: relative;
+    z-index: 3;
+    margin-left: 20px;
+    width: 80%;
+    cursor: pointer;
+}
+.cross{
+    float: right;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.titleBlock{
+    width: 703px;
+    height: 72px;
+    border-radius: 20px;
+    background: white;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+}
+.changeImageBlock{
+    width: 300px;
+    height: 300px;
+    border-radius: 100%;
+    background : black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.5;
+    /*z-index: 6;*/
+}
+.changeImageBlockHidden{
+    opacity: 0;
+}
+.editWrapper{
+    position: absolute;
+    right: 28px;
+    cursor: pointer;
+}
+.title{
+    font-weight: normal;
+    color : #595959;
+    font-size: 57px;
+    margin-top: 10px;
+}
+.desc{
+    font-size: 40px;
+    color : #AEAEAE;
+    margin-top: 20px;
+}
+.back{
+    background : black;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    animation: userDataBack 0.4s forwards;
+}
+.attachedMain{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    /*background: black;*/
+}
+.input{
+    width: 543px;
+    height: 72px;
+    border: none;
+    outline: none;
+    font-size: 52px;
+    color : #AEAEAE;
+}
+.input::placeholder{
+    font-size: 42px;
+    color : rgb(201, 200, 197)
+}
+.miniTitle{
+    margin-bottom: 15px;
+    color  : #777777;
+    font-size: 30px;
+    margin-left: 222px;
+    margin-top: 26px;
+    font-weight: normal;
+}
+.itemMain{
+    height: 105px;
+    width: 703px;
+    border-radius: 20px;
+    background: white;
+    display: flex;
+    margin: 0 auto;
+    cursor: pointer;
+    margin-top: 44px;
+    border: 1px solid #C4C4C4;
+    align-items: center;
+}
+
+
+.itemImage img{
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+
+}
+.itemImage{
+    margin-right: 18px;
+    margin-left: 26px;
+}
+.itemBlock{
+    width: 229px;
+    height: 100%;
+}
+.item_user{
+    color : #595959;
+    font-weight: normal;
+    font-size: 25px;
+    margin-bottom: 14px;
+    margin-top: 9px;
+    margin-left: 18px;
+}
+.item_desc{
+    color : #AEAEAE;
+    font-size: 20px;
+    margin-left: 18px;
+    font-weight: normal;
+}
+.backgroundBlock{
+    position: relative;
+    overflow: hidden;
+    width: 425px;
+    height: 72px;
+    margin-left: 193px;
+    margin-bottom: 40px;
+    /*margin-left: 69px;*/
+}
+.backgroundBlock input[type='file']{
+    position: absolute;
+    left: 0;
+    outline: none;
+    opacity: 0;
+}
+.anotherFile{
+    bottom: 0;
+}
+.inputFile{
+    top: 0;
+}
+.middleFile{
+    top: 25%;
+}
+.leave{
+    color : #DB6666;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: normal;
+    cursor: pointer;
+}
+.gallery{
+    width: 100%;
+    height: 100%;
+    background: white;
+    position: absolute;
+}
+.titlegallery{
+    font-weight: normal;
+    color : #595959;
+    font-size: 57px;
+    background: white;
+    margin: 0;
+    text-align: center;
+    padding-bottom: 40px;
+}
+.galleryImage{
+    margin-left: 45px;
+    display: inline-block;
+}
+.arrowleft{
+    padding-top: 20px;
+    padding-left: 20px;
+    background: white;
+}
+@keyframes galleryOpen {
+    0%{
+        left: 100%;
+    }
+    100%{
+        left: 0;
+    }
+}
+.galleryOpen{
+    width: 703px;
+    height: 58px;
+    border-radius: 20px;
+    background: white;
+    margin: 0 auto;
+    margin-top: 30px;
+    border: 1px solid #C4C4C4;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    font-size: 28px;
+    color : #575757;
+    cursor: pointer;
+    transition: background 0.5s;
+}
+.galleryOpen:hover{
+    background : rgba(248, 247, 247, 1);
+}

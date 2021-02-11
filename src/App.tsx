@@ -9,6 +9,7 @@ import Default from "./components/default/default";
 import CreateRoom from "./components/createroom/createRoom";
 import {useDispatch} from "react-redux";
 import { getAuthTC } from './reducers/login_reducer';
+import 'antd/dist/antd.css';
 
 const App = function(){
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const App = function(){
                   <Route path={'/enterroom'} component={EnterRoom} />
                   <Route path={'/createroom'} component={CreateRoom} />
                   <Route path={'/messages'} component={Messages} />
-                  <Route exact path={'/'} component={Default} />
+                  <Route exact path={'/'} component={Login} />
               </Switch>
           </div>
       );

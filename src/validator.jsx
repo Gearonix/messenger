@@ -28,11 +28,7 @@ export const LoginVal = function (value){
     }
 
 }
-export const MessageVal = function (value){
-    if (!value){
-        return '_NV_'
-    }
-}
+
 export const ChangeProfileVal = function (value){
     if (!value){
         return 'This field is required';

@@ -68,7 +68,26 @@ if ($method=='POST'){
 		case 'changeroomdata':
 			changeRoomData($data);
 			break;
-		default:
+		case 'setattachedimages':
+		 	header('Content-Type: form/multipart');
+	    	$data = json_decode($_POST['json'],true);
+			$name =  $_FILES['image']['name'];
+			$tmp_name =  $_FILES['image']['tmp_name'];
+			setAttachedImages($name,$tmp_name,$data); 
+			break;
+		case 'changeroomimage':
+			header('Content-Type: form/multipart');
+	    	$data = json_decode($_POST['json'],true);
+			$name =  $_FILES['image']['name'];
+			$tmp_name =  $_FILES['image']['tmp_name'];
+			changeRoomImage($name,$tmp_name,$data); 
+			break;
+		case 'changebackground':
+			header('Content-Type: form/multipart');
+	    	$data = json_decode($_POST['json'],true);
+			$name =  $_FILES['image']['name'];
+			$tmp_name =  $_FILES['image']['tmp_name'];
+			changeBackground($name,$tmp_name,$data); 
 			break;
 }
 

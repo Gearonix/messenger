@@ -104,7 +104,7 @@ function createRoom($data){
 function changeProfile($data){
 	extract($data);
 	$result = checkRequest("select * from users where user_name='$name';");
-	throwError($reuslt->num_rows>0,['code' => 15,'message' => 'This name already exists']);
+	throwError($result->num_rows>0,['code' => 15,'message' => 'This name already exists']);
 	checkRequest("update users set user_name='$name', description='$description' where user_name = '$oldname';");
 	checkRequest("update messages set sender='$name' where sender = '$oldname';");
 }
@@ -117,6 +117,19 @@ function loadImage($name,$tmp_name,$data){
 	checkRequest("update messages set image='images/$name' where sender='$user_name';");
 	ok(['code' => 0,'status' => 200,'message' => 'ok','src' => "images/$name"]);
 }
+
+
+function setAttachedImages($name,$tmp_name,$data){
+	$user_name = $data['from'];
+	$room = $data['room'];
+	throwError(!$name,['code' => 45,'status' => 200,'message' => 'old image']);
+	$result = move_uploaded_file($tmp_name, "attached_images/$name");
+	throwError(!$result,['code' => 10,'status' => 500,'message' => 'Request Error']);
+	checkRequest("update messages SET attached_images = JSON_ARRAY_APPEND (attached_images, '$', 'attached_images/$name') where sender='$user_name' and room='$room' order by id desc limit 1;");
+	ok();
+}
+
+
 function changeRoomData($data){
 	extract($data);
 	checkRequest("update rooms set room='$room',description='$description' where room='$name';");
@@ -124,5 +137,19 @@ function changeRoomData($data){
 	checkRequest("update users set room='$room' where room='$name';");
 	// ok();
 	echo json_encode("update rooms set room='$room',description='$description' where room='$name';");
+}
+function changeRoomImage($name,$tmp_name,$data){
+	$room = $data['room'];
+	$result = move_uploaded_file($tmp_name, "room_images/$name");
+	throwError(!$result,['code' => 10,'status' => 500,'message' => 'Request Error']);
+	checkRequest("update rooms set image='room_images/$name' where room='$room';");
+	ok();
+}
+function changeBackground($name,$tmp_name,$data){
+	$room = $data['room'];
+	$result = move_uploaded_file($tmp_name, "room_backgrounds/$name");
+	throwError(!$result,['code' => 10,'status' => 500,'message' => 'Request Error']);
+	checkRequest("update rooms set background='room_backgrounds/$name' where room='$room';");
+	ok();
 }
 ?>

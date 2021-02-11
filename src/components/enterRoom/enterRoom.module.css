@@ -111,3 +111,52 @@
     outline: none;
     /*margin-bottom: 4px;*/
 }
+.itemMain{
+    height: 105px;
+    width: 703px;
+    border-radius: 20px;
+    background: white;
+    display: flex;
+    margin: 0 auto;
+    cursor: pointer;
+    margin-top: 44px;
+    border: 1px solid #C4C4C4;
+    align-items: center;
+}
+
+
+.itemImage img{
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+
+}
+.itemImage{
+    margin-right: 18px;
+    margin-left: 26px;
+}
+.itemBlock{
+    width: 229px;
+    height: 100%;
+}
+.item_user{
+    color : #595959;
+    font-weight: normal;
+    font-size: 25px;
+    margin-bottom: 14px;
+    margin-top: 9px;
+    margin-left: 18px;
+}
+.item_desc{
+    color : #AEAEAE;
+    font-size: 20px;
+    margin-left: 18px;
+    font-weight: normal;
+}
+.roomsTitleOK{
+    font-size: 40px;
+    color : #8E8E8E;
+    font-weight: normal;
+    margin: 0;
+    margin-top: 27px;
+}

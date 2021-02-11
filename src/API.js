@@ -29,9 +29,40 @@ const API = {
     auth(){
         return instance.get('/auth');
     },
-    // setCookie(user_name){
-    //     return instance.post('/setcookie', {user_name : user_name});
-    // }
+    clearCookie(){
+        return instance.get('/clearcookie')
+    },
+    getUser(user_name){
+        return instance.post('/getuser',{user_name})
+    },
+    addFiles(data){
+        let some_file = new FormData()
+        some_file.append('image',data.item);
+        some_file.append('json',JSON.stringify(data));
+        return axios.post('http://localhost:4001/setattachedimages',some_file)
+    },
+    getRoomData(data){
+        return instance.post('/getroomdata',data)
+    },
+    changeRoomData(data){
+        return instance.post('/changeroomdata',data)
+    },
+    changeRoomImage(data){
+        let some_file = new FormData()
+        some_file.append('image',data.file);
+        some_file.append('json',JSON.stringify(data));
+        return axios.post('http://localhost:4001/changeroomimage',some_file)
+    },
+    changeBackground(data){
+        let some_file = new FormData()
+        some_file.append('image',data.file);
+        some_file.append('json',JSON.stringify(data));
+        return axios.post('http://localhost:4001/changebackground',some_file)
+    },
+    getRooms(){
+        return instance.get('/getrooms')
+    }
 }
+// { room : string | null,file : any })
 
 export default API;
